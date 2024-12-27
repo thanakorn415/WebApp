@@ -1,4 +1,3 @@
-
 <?php
 $servername = "localhost";
 $username = "root";
@@ -25,27 +24,3 @@ if ($conn->query($sql) === TRUE) {
 
 $conn->close();
 ?>
-
-
-index.html
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Dynamic Website</title>
-</head>
-<body>
-    <h1>Submit Your Data</h1>
-    <form action="submit.php" method="POST">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required><br><br>
-
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required><br><br>
-
-
-        <button type="submit">Submit</button>
-    </form>
-</body>
-</html>
-
-

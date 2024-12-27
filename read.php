@@ -8,7 +8,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
-}
+}y
 
 $sql = "SELECT * FROM users";
 $result = $conn->query($sql);
@@ -31,6 +31,5 @@ if ($result->num_rows > 0) {
 } else {
     echo "No data found.";
 }
-
 $conn->close();
 ?>
