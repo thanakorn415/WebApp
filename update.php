@@ -10,34 +10,43 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['id'])) {
-    $id = $_GET['id'];
-    $sql = "SELECT * FROM users WHERE id = $id";
-    $result = $conn->query($sql);
-    $user = $result->fetch_assoc();
-} elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $id = $_POST['id'];
+$id = $_GET['id'];
+$sql = "SELECT * FROM users WHERE id=$id";
+$result = $conn->query($sql);
+$row = $result->fetch_assoc();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST['name'];
     $email = $_POST['email'];
-
     $sql = "UPDATE users SET name='$name', email='$email' WHERE id=$id";
 
     if ($conn->query($sql) === TRUE) {
-        echo "Record updated successfully. <a href='read.php'>View All Records</a>";
+        header("Location: read.php");
     } else {
-        echo "Error updating record: " . $conn->error;
+        echo "Error: " . $conn->error;
     }
-
-    $conn->close();
-    exit;
 }
 ?>
-
-<form action="update.php" method="POST">
-    <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
-    <label for="name">Name:</label>
-    <input type="text" name="name" value="<?php echo $user['name']; ?>" required><br><br>
-    <label for="email">Email:</label>
-    <input type="email" name="email" value="<?php echo $user['email']; ?>" required><br><br>
-    <button type="submit">Update</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Record</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Update Record</h1>
+    <form method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" value="<?php echo $row['name']; ?>" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" value="<?php echo $row['email']; ?>" required>
+        <button type="submit">Update</button>
+    </form>
+    <hr>
+    <form action="read.php" method="GET">
+        <button type="submit">Back to Records</button>
+    </form>
+</body>
+</html>
