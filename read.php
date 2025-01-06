@@ -9,7 +9,7 @@
 <body>
     <h1>All Records</h1>
     <?php
-    $servername = "localhost";
+    $servername = "db";
     $username = "root";
     $password = "24152415";
     $dbname = "my_database";

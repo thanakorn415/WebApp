@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "24152415";
-$dbname = "my_database";
+$dbname = "db";
 
 $name = $_POST['name'];
 $email = $_POST['email'];
